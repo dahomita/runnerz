@@ -3,8 +3,16 @@ import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Version;
+import jakarta.persistence.*;
+
 // validate constraint
+@Entity
+@Table(name = "run")
 public record Run(
+    @Id
     Integer id,
     @NotEmpty
     String title, 
@@ -12,7 +20,9 @@ public record Run(
     LocalDateTime completedOn, 
     @Positive
     Integer miles, 
-    Location location
+    Location location,
+    @Version
+    Integer Version
 ) {
     public Run {
         if (!completedOn.isAfter(startedOn)){

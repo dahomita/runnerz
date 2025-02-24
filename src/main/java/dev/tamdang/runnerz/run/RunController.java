@@ -37,19 +37,19 @@ public class RunController {
     @ResponseStatus(HttpStatus.CREATED) //notify that something did sended
     @PostMapping("") //annotation
     void create(@Valid @RequestBody Run run){
-        runRepository.create(run);
+        runRepository.save(run);
     }
     // put
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
     void update(@Valid @RequestBody Run run, @PathVariable Integer id){
-        runRepository.update(run,id);
+        runRepository.save(run);
     }
     // delete
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     void delete(@PathVariable Integer id){
-        runRepository.delete(id);
+        runRepository.delete(runRepository.findById(id).get());
     }
     
 }
